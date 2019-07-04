@@ -53,6 +53,7 @@ void ball_players(){
 	
 	// esperando recepção das mensagens
     while(true){
+		view->updateNewDetection(info_packet);
     	if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) >= 0){ 
     		valread = read(sock, &info_packet, sizeof(pacote)); 
     		while(valread){

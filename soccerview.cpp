@@ -535,6 +535,12 @@ void GLSoccerView::updateNewDetection(pacote& socketPacket)
   vector2d ball;
   int cam = socketPacket.camera_id;
 
+  if(numBlueRobots != 0||true){
+      robosAmarelos.erase(robosAmarelos.begin(), robosAmarelos.end());
+      robosAzuis.erase(robosAzuis.begin(), robosAzuis.end());
+  }else{
+    cout << "nao recebi nenhum" << endl;
+  }
   graphicsMutex.lock();
   if(cam+1>robots.size()){
     robots.resize(cam+1);
@@ -555,7 +561,7 @@ void GLSoccerView::updateNewDetection(pacote& socketPacket)
     robot.team = teamBlue;
     robot.cameraID = cam;
     //robot.conf = sslRobot.confidence();
-    robots[cam].append(robot);
+    //robots[cam].append(robot);
     robot_battery[0][robot.id] = socketPacket.battery[0][robot.id];
     dist = sqrt(pow((socketPacket.robots_blue[i].x - socketPacket.ball.first), 2) + pow((socketPacket.robots_blue[i].y - socketPacket.ball.second), 2));
     cout << "distancia do robo " << robot.id << " ate a bola : " << dist << endl;
@@ -564,6 +570,7 @@ void GLSoccerView::updateNewDetection(pacote& socketPacket)
     }else{
       interactMark[0][robot.id] = false;
     }
+    robosAzuis.push_back(robot);
   }
 
   for(int i=0; i<numYellowRobots; i++){
@@ -573,7 +580,7 @@ void GLSoccerView::updateNewDetection(pacote& socketPacket)
     robot.team = teamYellow;
     robot.cameraID = cam;
     //robot.conf = sslRobot.confidence();
-    robots[cam].append(robot);
+    //robots[cam].append(robot);
     robot_battery[1][robot.id] = socketPacket.battery[1][robot.id];
     dist = sqrt(pow((socketPacket.robots_yellow[i].x - socketPacket.ball.first), 2) + pow((socketPacket.robots_yellow[i].y - socketPacket.ball.second), 2));
     cout << "distancia do robo " << robot.id << " ate a bola : " << dist << endl;
@@ -582,6 +589,14 @@ void GLSoccerView::updateNewDetection(pacote& socketPacket)
     }else{
       interactMark[1][robot.id] = false;
     }
+    robosAmarelos.push_back(robot);
+  }
+
+  for(int x = 0; x < (int) robosAzuis.size(); x++){
+    robots[cam].append(robosAzuis[x]);
+  }
+  for(int x = 0; x < (int) robosAmarelos.size(); x++){
+    robots[cam].append(robosAmarelos[x]);
   }
 
   for(int i=0; i<numBalls; i++){

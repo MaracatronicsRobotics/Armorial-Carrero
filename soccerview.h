@@ -58,9 +58,9 @@ typedef struct{
 
 // pacote como um todo
 typedef struct{
-    int qt_blue;
-    int qt_yellow;
-    int camera_id;
+    char qt_blue;
+    char qt_yellow;
+    char camera_id;
     unsigned char battery[2][maxRobots]; // 1byte (0 a 100)
     robot_coords robots_blue[maxRobots];
     robot_coords robots_yellow[maxRobots];
@@ -166,6 +166,8 @@ public:
   void updateNewDetection (pacote &socketPacket);
   void updateDetection (const SSL_DetectionFrame &detection );
   void updateFieldGeometry (const SSL_GeometryFieldSize &fieldSize );
+  vector<Robot> robosAmarelos;
+  vector<Robot> robosAzuis;
 
 public slots:
   void resetView();
@@ -174,5 +176,6 @@ private slots:
 signals:
   void postRedraw();
 };
+
 
 #endif
