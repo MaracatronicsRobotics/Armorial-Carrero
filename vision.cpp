@@ -21,8 +21,6 @@
 
 #include <QApplication>
 #include <iostream>
-#include <referee/sslreferee/sslreferee.h>
-
 
 #include <entity/armorialvisionclient/armorialvisionclient.h>
 #include <entity/armorialvisionupdater/armorialvisionupdater.h>
@@ -36,9 +34,6 @@
 #include "exithandler.h"
 
 #include "samico.h"
-
-//#include <referee/sslreferee/sslreferee.h>
-
 
 Samico *samico = new Samico();
 

@@ -24,14 +24,12 @@
 #define SAMICO_H
 
 #include <bits/stdc++.h>
-//#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <SFML/Graphics.hpp>
 #include "Ball/ball.h"
 #include "Robot/robot.h"
 #include "types/frame.h"
-#include <PathPlanning/path.h>
 
 using namespace std;
 

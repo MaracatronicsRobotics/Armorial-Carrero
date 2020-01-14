@@ -35,8 +35,7 @@ SOURCES += \
     LossFilter/loss.cpp \
     MultiObjectFilter/multiobject.cpp \
     MultiObjectFilter/multiobjectfilter.cpp \
-    NoiseFilter/noise.cpp \
-    PathPlanning/path.cpp \
+	NoiseFilter/noise.cpp \
     grsSimulator/grsSimulator.cpp \
     Robot/robot.cpp \
     types/object.cpp \
@@ -50,10 +49,7 @@ SOURCES += \
     utils/fieldareas.cpp \
     utils/fieldtypes.cpp \
     exithandler.cpp \
-    entity/armorialvisionclient/armorialvisionclient.cpp \
-    referee/referee.cpp \
-    referee/sslreferee/sslreferee.cpp \
-    referee/sslreferee/sslgameinfo.cpp
+	entity/armorialvisionclient/armorialvisionclient.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -134,8 +130,7 @@ HEADERS += \
     include/timer.h \
     KalmanFilter/kalman.hpp \
     KalmanFilter/kalmanstate.h \
-    KalmanFilter/matrix.h \
-    PathPlanning/path.h \
+	KalmanFilter/matrix.h \
     grsSimulator/grsSimulator.h \
     LossFilter/loss.h \
     NoiseFilter/noise.h \
@@ -152,8 +147,5 @@ HEADERS += \
     utils/color.h \
     entity/armorialvisionupdater/armorialvisionupdater.h \
     entity/armorialvisionupdater/robottracker.h \
-    entity/eyebase.hh \
-    referee/referee.h \
-    referee/sslreferee/sslreferee.h \
-    referee/sslreferee/sslgameinfo.h
+	entity/eyebase.hh
 
