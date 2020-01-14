@@ -21,6 +21,8 @@
 
 #include <QApplication>
 #include <iostream>
+#include <referee/sslreferee/sslreferee.h>
+
 
 #include <entity/armorialvisionclient/armorialvisionclient.h>
 #include <entity/armorialvisionupdater/armorialvisionupdater.h>
@@ -34,6 +36,9 @@
 #include "exithandler.h"
 
 #include "samico.h"
+
+//#include <referee/sslreferee/sslreferee.h>
+
 
 Samico *samico = new Samico();
 
@@ -178,16 +183,20 @@ int main(int argc, char** argv) {
     // Create modules
     ArmorialVisionClient eyeClient(visionSystemPort);
     ArmorialVisionUpdater eyeUpdater(&eyeClient, fieldLimit, enableLossFilter, enableKalmanFilter, enableNoiseFilter, debugDetection, debugGeometry, samico);
+
     // Start modules
     eyeClient.start();
     eyeUpdater.start();
+
     // Run app
     bool exec = app.exec();
     // Stop modules
     eyeClient.terminate(); // blocking thread, need to terminate
     eyeUpdater.stopRunning();
+
     // Wait for modules threads
     eyeClient.wait();
     eyeUpdater.wait();
+
     return exec;
 }

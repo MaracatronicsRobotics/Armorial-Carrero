@@ -1,3 +1,4 @@
+ 
 /***
  * Maracatronics Robotics
  * Federal University of Pernambuco (UFPE) at Recife
@@ -58,46 +59,30 @@ public:
     Samico();
     void drawWindow();
     void setFrame(Frame *newFrame);
-    pathPlanner getPath();
     sf::RenderWindow *getWindow();
-
 
 private:
     void drawBall();
     void drawRobots();
     void zoomViewAt(sf::Vector2i pixel, sf::RenderWindow *window, double zoom);
-    void setColisions(int index_at, bool isBlue);
-    void unsetColisions(int index_at, bool isBlue);
-
 
 private:
-    Frame *frame_received=new Frame(8,100);
-
-    pathPlanner pathing = pathPlanner(max_y/10.0, max_x/5.0);
-
-    sf::CircleShape *ball = new sf::CircleShape(ballRadius);
-    sf::RectangleShape *fundoSamico;
-    sf::Font font;
-    sf::CircleShape *circuloCentral;
-    sf::Text blueText[maxRobots];
-    sf::Sprite blueSprite[maxRobots];
-
-    sf::CircleShape blueRobots_shape[maxRobots];
-    sf::CircleShape yellowRobots_shape[maxRobots];
-
+    // desenhos do samico
     sf::RenderWindow *window;
-
-    sf::Text yellowText[maxRobots];
-    sf::Sprite yellowSprite[maxRobots];
+    Frame *frame_received=new Frame(8,100);
+    sf::RectangleShape *fundoSamico;
+    sf::CircleShape *circuloCentral;
     sf::ContextSettings settings;
-
-    bool **mat;
-    vector<pair<int, int>> blueRobots_position;
-    vector<pair<int, int>> yellowRobots_position;
-    pair<int, int> ball_position;
-
     const double zoomAmount = 1.1;
 
+    // textura e sprite dos robos
+    sf::Texture texture;
+    sf::Sprite sprite;
+
+    // bola
+    sf::CircleShape *ball = new sf::CircleShape(ballRadius);
+
+    // vetor de linhas externas
     sf::Vertex linhasExternas[10] =
     {
         sf::Vertex(sf::Vector2f(deslocamentoBorda, deslocamentoBorda)),
@@ -112,6 +97,7 @@ private:
         sf::Vertex(sf::Vector2f(max_x - deslocamentoBorda, max_y/2.0))
     };
 
+    // vetor do gol esquerdo (baixo)
     sf::Vertex golEsquerdo[6] =
     {
         sf::Vertex(sf::Vector2f((max_x/2.0) - 1000.f, deslocamentoBorda)),
@@ -122,6 +108,7 @@ private:
         sf::Vertex(sf::Vector2f((max_x/2.0) + 1000.f, 1000.f + deslocamentoBorda))
     };
 
+    // vetor do gol direito (cima)
     sf::Vertex golDireito[6] =
     {
         sf::Vertex(sf::Vector2f((max_x/2.0) - 1000.f, max_y - deslocamentoBorda)),
@@ -131,5 +118,6 @@ private:
         sf::Vertex(sf::Vector2f((max_x/2.0) - 1000.f, max_y - (1000.f + deslocamentoBorda))),
         sf::Vertex(sf::Vector2f((max_x/2.0) + 1000.f, max_y - (1000.f + deslocamentoBorda)))
     };
+    
 };
 #endif // SAMICO_H
