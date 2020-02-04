@@ -4,15 +4,11 @@ jobs:
   build-project:
     docker:
       - image: ubuntu:18.04
+      - image: ubuntu-qt:latestDistroOfficial_gcc_bionic
     steps:
-      - run: DEBIAN_FRONTEND=noninteractive apt-get update -qq && apt-get install -y git build-essential libsfml-dev g++ libqt4-dev libeigen3-dev protobuf-compiler libprotobuf-dev libdc1394-22 libdc1394-22-dev cmake libv4l-0 libopencv-dev freeglut3-dev qt5-default omniorb omniidl omniorb-nameserver libomniorb4-dev
-      - checkout
-      - run: make
-    machine:
-      timezone:
-        - America/Recife
+      - run: DEBIAN_FRONTEND=noninteractive apt-get update
     environment:
-        - QMAKE: /opt/qt54/bin/qmake
+      - TZ: "America/Recife"
   version: 2
   build_all:
     jobs:
