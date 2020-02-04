@@ -1,13 +1,45 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+jobs:
+  build:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - run: apt-get update -qq && apt-get install -y git \
+      build-essential \
+      libsfml-dev \
+      g++ \
+      libqt4-dev \
+      libeigen3-dev \
+      protobuf-compiler \
+      libprotobuf-dev \
+      libdc1394-22 \
+      libdc1394-22-dev \
+      cmake \
+      libv4l-0 \
+      libopencv-dev \
+      freeglut3-dev \
+      qt5-default \
+      omniorb \
+      omniidl \
+      omniorb-nameserver \
+      libomniorb4-dev
+      - checkout
+      - run: make
+  build-qt5:
+    docker:
+      - image: ubuntu:18.04
+    steps:
+      - run: apt-get update -qq && apt-get install -qq git
+      - checkout
+      - run: apt-get install -qq qtdeclarative5-dev
+      - run: mkdir -p build && cd build && cmake -DUSE_QT5=true .. && cd ..
+      - run: cmake -B build -DUSE_QT5=true .
+      - run: make
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  version: 2
+  build_all:
     jobs:
-      - welcome/run
+      - install-packages
+      - build-qt5
