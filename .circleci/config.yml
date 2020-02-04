@@ -10,7 +10,9 @@ jobs:
       - run: make
     machine:
       timezone:
-        America/Recife
+        - America/Recife
+    environment:
+        - QMAKE: /opt/qt54/bin/qmake
   version: 2
   build_all:
     jobs:
