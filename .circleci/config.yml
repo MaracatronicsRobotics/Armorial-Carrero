@@ -1,17 +1,23 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 jobs:
-  build-project:
+  build:
     docker:
       - image: ubuntu:18.04
-    environment:
-      - TZ: "America/Recife"
     steps:
-      - run: DEBIAN_FRONTEND=noninteractive apt update && apt install -y git libqt4-dev qt5-default gcc g++ build-essential cmake bash libxcb1-dev libicu-dev libssl-dev linux-headers-generic curl git libxrender-dev libpng3 libpng-dev libjpeg-turbo8 libjpeg-turbo8-dev libicu55 libicu-dev libgles2-mesa libgles2-mesa-dev libfreetype6-dev libsqlite3-dev libgstreamer0.10-0 libgstreamer0.10-dev libogg-dev libvorbis-dev bzip2 gperf bison && rm -rf /var/lib/apt/lists/*
-      - env: QT_VERSION_MAJOR 5.13
-      - env: QT_VERSION 5.13.2
-    
-workflows:    
+      - run: DEBIAN_FRONTEND=noninteractive apt update && apt upgrade -y && apt install -y sudo git gcc g++ build-essential cmake bash libxcb1-dev libicu-dev libssl-dev linux-headers-generic curl git libxrender-dev 
+      - run: DEBIAN_FRONTEND=noninteractive apt install -y -qq libqt4-dev qt5-default libeigen3-dev protobuf-compiler libprotobuf-dev libdc1394-22 libdc1394-22-dev libv4l-0 libopencv-dev freeglut3-dev
+      - run: rm -rf /var/lib/apt/lists/*
+      - checkout
+      - run: git clone https://github.com/maracatronics/GEARSystem.git
+      - run: cd GEARSystem
+      - run: cd GEARSystem/trunk && DEBIAN_FRONTEND=noninteractive ./build/corba_skeletons.sh
+      - run: qmake install_path=/usr/lib/
+      - run: make
+      - run: cd GEARSystem/trunk && sudo sh install.sh
+
+workflows:
+  version: 2.1
   build_all:
     jobs:
-      - build-project
+      - build
+
