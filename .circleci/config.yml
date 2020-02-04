@@ -4,11 +4,10 @@ jobs:
   build-project:
     docker:
       - image: ubuntu:18.04
-      - image: ubuntu-qt:latestDistroOfficial_gcc_bionic
     environment:
       - TZ: "America/Recife"
     steps:
-      - run: DEBIAN_FRONTEND=noninteractive apt-get update
+      - run: DEBIAN_FRONTEND=noninteractive apt update && apt install git libqt4-dev qt5-default
     
 workflows:    
   build_all:
