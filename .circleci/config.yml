@@ -7,7 +7,7 @@ jobs:
     environment:
       - TZ: "America/Recife"
     steps:
-      - run: DEBIAN_FRONTEND=noninteractive apt update && apt install git libqt4-dev qt5-default
+      - run: DEBIAN_FRONTEND=noninteractive apt update && apt install -y git libqt4-dev qt5-default
     
 workflows:    
   build_all:
