@@ -10,7 +10,7 @@ jobs:
     steps:
       - run: DEBIAN_FRONTEND=noninteractive apt-get update
     
-  version: 2
+workflows:    
   build_all:
     jobs:
       - build-project
