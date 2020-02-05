@@ -4,7 +4,8 @@ jobs:
     docker:
       - image: ubuntu:18.04
     steps:
-      - run: DEBIAN_FRONTEND=noninteractive apt update && apt upgrade -y && apt install -y sudo git gcc g++ build-essential cmake bash libxcb1-dev libicu-dev libssl-dev linux-headers-generic curl git libxrender-dev libqt4-dev qt5-default libeigen3-dev protobuf-compiler libprotobuf-dev libdc1394-22 libdc1394-22-dev libv4l-0 libopencv-dev freeglut3-dev
+      - run: DEBIAN_FRONTEND=noninteractive apt update && apt upgrade -y && apt install -y sudo git gcc g++ build-essential cmake bash libxcb1-dev libicu-dev libssl-dev linux-headers-generic curl git libxrender-dev 
+      - run: DEBIAN_FRONTEND=noninteractive apt install -y libqt4-dev qt5-default libeigen3-dev protobuf-compiler libprotobuf-dev libdc1394-22 libdc1394-22-dev libv4l-0 libopencv-dev freeglut3-dev
       - run: rm -rf /var/lib/apt/lists/*
       - checkout
       - run: git clone https://github.com/maracatronics/GEARSystem.git
