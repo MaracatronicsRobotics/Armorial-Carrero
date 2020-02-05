@@ -11,7 +11,7 @@ jobs:
       - run: git clone https://github.com/maracatronics/GEARSystem.git
       - run: cd GEARSystem
       - run: cd GEARSystem/trunk && DEBIAN_FRONTEND=noninteractive ./build/corba_skeletons.sh
-      - run: cd GEARSystem/trunk && qmake install_path=/usr/lib/ && make
+      - run: qmake install_path=/usr/lib/ && make
       - run: cd GEARSystem/trunk && sudo sh install.sh
 
 workflows:
