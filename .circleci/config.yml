@@ -9,7 +9,7 @@ jobs:
       - run: rm -rf /var/lib/apt/lists/*
       - checkout
       - run: git clone https://github.com/maracatronics/GEARSystem.git
-      - run: cd GEARSystem && DEBIAN_FRONTEND=noninteractive ./instalation.sh
+      - run: cd GEARSystem && DEBIAN_FRONTEND=noninteractive sudo sh ./instalation.sh
 #       - run: cd GEARSystem/trunk && DEBIAN_FRONTEND=noninteractive ./build/corba_skeletons.sh
 #       - run: cd GEARSystem/trunk && qmake install_path=/usr/lib/ GEARSystem.pro && make
 #       - run: cd GEARSystem/trunk && sudo sh install.sh
