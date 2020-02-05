@@ -10,6 +10,7 @@ jobs:
       - checkout
       - run: git clone https://github.com/maracatronics/GEARSystem.git
       - run: cd GEARSystem && DEBIAN_FRONTEND=noninteractive sudo sh ./instalation.sh
+      - run: DEBIAN_FRONTEND=noninteractive sudo sh ./compiling.sh
 
 
 workflows:
