@@ -35,7 +35,9 @@
 
 #include "samico.h"
 
-Samico *samico = new Samico();
+#define debug false
+
+Samico *samico;
 
 void samico_drawThread(){
     samico->drawWindow();
@@ -52,9 +54,12 @@ void printUsage() {
 int main(int argc, char** argv) {
 
 // Run Samico
-    samico->getWindow()->setActive(false); // deactivating samico in main thread
-    thread first (samico_drawThread);
-    first.detach();
+    if(debug){
+        samico = new Samico();
+        samico->getWindow()->setActive(false); // deactivating samico in main thread
+        thread first (samico_drawThread);
+        first.detach();
+    }
 
     QApplication app(argc, argv);
     int visionSystemPort = 10002;
