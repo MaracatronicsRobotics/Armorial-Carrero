@@ -46,7 +46,7 @@
 class ArmorialVisionUpdater:public Entity
 {
 public:
-    ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit=FieldAreas::ALL, bool enableLossFilter=true, bool enableKalmanFilter=true, bool enableNoiseFilter=true, bool debugDetection=false, bool debugGeometry=false, Samico *samico = new Samico());
+    ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit=FieldAreas::ALL, bool enableLossFilter=true, bool enableKalmanFilter=true, bool enableNoiseFilter=true, bool debugDetection=false, bool debugGeometry=false, Samico *samico = NULL);
     ~ArmorialVisionUpdater();
 
     QList<Robot*> getRobotObjects() const;

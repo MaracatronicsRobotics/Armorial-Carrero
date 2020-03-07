@@ -171,7 +171,8 @@ void ArmorialVisionUpdater::loop() {
             _newDetectionUpdates.release();
 
         // UPDATE Samico
-        samico->setFrame(frameAT);
+        if(samico != NULL)
+            samico->setFrame(frameAT);
     }
 
     // Geometry data
