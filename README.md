@@ -9,6 +9,7 @@ This release contain a full functional software that can be used by the teams of
     - Noise Filter
     - Loss Filter
 
+A brief description about each filter can be found at GithubWiki. 
 
 ## Armorial-Project
 
