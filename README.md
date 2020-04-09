@@ -1,4 +1,5 @@
 # Armorial-Carrero
+[![Build Status](https://travis-ci.com/maracatronics/Armorial-Carrero.svg?branch=master)](https://travis-ci.com/maracatronics/Armorial-Carrero)
 
 This repository contains the software used by Maracatronics Robotics Team and Research Lab to receive packages from SSL-Vision System used by Small Size League.
 
@@ -67,4 +68,4 @@ make
 ```
 - Step 3: Run WRBackbone
 
-./build/visao
+./bin/visao
