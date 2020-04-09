@@ -140,7 +140,7 @@ HEADERS += \
     include/timer.h \
     KalmanFilter/kalman.hpp \
     KalmanFilter/kalmanstate.h \
-        KalmanFilter/matrix.h \a
+        KalmanFilter/matrix.h \
     LossFilter/loss.h \
     NoiseFilter/noise.h \
     Robot/robot.h \
