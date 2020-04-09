@@ -12,7 +12,7 @@ This release contain a full functional software that can be used by the teams of
 
 A brief description about each filter can be found at GithubWiki. 
 
-## Armorial-Project
+## Armorial-Project:
 
 
 ## Dependencies:
@@ -67,5 +67,6 @@ qmake ..
 make
 ```
 - Step 3: Run WRBackbone
-
-./bin/visao
+```bash
+./bin/Armorial-Carrero
+```

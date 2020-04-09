@@ -7,7 +7,7 @@ CONFIG -= app_bundle
 
 VERSION  = 1.0.0
 DESTDIR  = ../bin
-TARGET   = Armorial-Suassuna
+TARGET   = Armorial-Carrero
 
 
 # Temporary dirs
