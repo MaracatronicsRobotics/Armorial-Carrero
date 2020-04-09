@@ -46,8 +46,7 @@ SOURCES += \
     LossFilter/loss.cpp \
     MultiObjectFilter/multiobject.cpp \
     MultiObjectFilter/multiobjectfilter.cpp \
-	NoiseFilter/noise.cpp \
-    grsSimulator/grsSimulator.cpp \
+        NoiseFilter/noise.cpp \
     Robot/robot.cpp \
     types/object.cpp \
     vision.cpp \
@@ -141,8 +140,7 @@ HEADERS += \
     include/timer.h \
     KalmanFilter/kalman.hpp \
     KalmanFilter/kalmanstate.h \
-	KalmanFilter/matrix.h \
-    grsSimulator/grsSimulator.h \
+        KalmanFilter/matrix.h \a
     LossFilter/loss.h \
     NoiseFilter/noise.h \
     Robot/robot.h \
