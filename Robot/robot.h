@@ -23,6 +23,7 @@
 #define ROBOT_H
 
 #include <types/object.h>
+#include <include/timer.h>
 
 class Robot: public Object{
 
@@ -57,6 +58,11 @@ public:
     Velocity getRobotVelocity();
 
     QString name();
+
+    // angularSpeed
+    bool hasLastAngle;
+    double lastAngle;
+    MRCTimer *timer;
 
     void updateToSensor();
 
