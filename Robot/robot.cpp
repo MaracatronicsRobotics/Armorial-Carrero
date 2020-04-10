@@ -40,6 +40,9 @@ Robot::Robot(quint8 color, quint32 teamId, quint32 robotId, bool enableLossFilte
     _teamId = teamId;
     _robotId = robotId;
     _debugDetection = debugDetection;
+    hasLastAngle = false;
+
+    timer = new MRCTimer(1);
 
 }
 
@@ -56,6 +59,21 @@ QString Robot::name() {
 
 
 void Robot::updateToSensor() {
+
+    /* angular speed set */
+
+    if(!hasLastAngle){
+        hasLastAngle = true;
+        lastAngle = _orientation.value();
+    }
+    else{
+        if(timer->checkTimerEnd()){
+            AngularSpeed angSpeed(true, (_orientation.value() - lastAngle)/(timer->getTimeInNanoSeconds() / 1E9));
+            sensor()->setPlayerAngularSpeed(_teamId, _robotId, angSpeed);
+            lastAngle = _orientation.value();
+            timer->update();
+        }
+    }
 
     sensor()->setPlayerPosition(_teamId, _robotId, _position);
 
