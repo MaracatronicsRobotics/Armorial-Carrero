@@ -24,7 +24,7 @@
 #include <GEARSystem/Types/types.hh>
 #include <utils/color.h>
 #define MAX_DIST_ASSOCIATION 0.20
-#define MAX_ROBOTS 6
+#define MAX_ROBOTS 8
 class RobotTracker {
 private:
     QHash<int,QMap<quint8,Position>* > _associations;
