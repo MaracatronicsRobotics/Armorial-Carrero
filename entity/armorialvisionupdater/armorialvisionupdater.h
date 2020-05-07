@@ -38,7 +38,7 @@
 #include "samico.h"
 #include <types/frame.h>
 
-#define MAX_ROBOTS 6
+#define MAX_ROBOTS 8
 #define FILTER_TIME 300 // ms
 
 #define MM2METER (1/1000.0)
