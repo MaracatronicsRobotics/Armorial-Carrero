@@ -19,8 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ***/
 
-#ifndef FIELDTYPE_HH
-#define FIELDTYPE_HH
+#ifndef FIELDTYPE_H
+#define FIELDTYPE_H
 #include <QString>
 namespace FieldTypes {
     enum FieldType {
@@ -34,4 +34,4 @@ namespace FieldTypes {
     QString toString(FieldType fieldType);
     FieldTypes::FieldType fromString(const QString &fieldTypeStr);
 }
-#endif // FIELDTYPE_HH
+#endif // FIELDTYPE_H
