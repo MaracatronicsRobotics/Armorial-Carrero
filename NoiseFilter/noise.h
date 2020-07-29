@@ -39,4 +39,4 @@ class Noise{
         MRCTimer *temporizer;
 };
 
-#endif
+#endif // NOISE_H

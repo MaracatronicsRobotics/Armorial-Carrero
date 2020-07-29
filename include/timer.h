@@ -19,8 +19,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ***/
 
-#ifndef TIMER_HH_
-#define TIMER_HH_
+#ifndef TIMER_H
+#define TIMER_H
 
 #include <ctime>
 
@@ -51,4 +51,4 @@ private:
     timespec time1, time2;
 };
 
-#endif // TIMER_HH_
+#endif // TIMER_H
