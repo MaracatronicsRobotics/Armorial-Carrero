@@ -16,12 +16,17 @@ MOC_DIR = tmp/moc
 UI_DIR = tmp/moc
 RCC_DIR = tmp/rc
 
+SUBDIRS += \
+    visao.pro
+
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 LIBS *= -lprotobuf -lGLU -pthread -lsfml-graphics -lsfml-window -lsfml-system -lGEARSystem -lomniORB4 -lomnithread -lQt5Core -lpthread
+
+system(echo "compiling protobuf" && cd include/3rd_party/protobuf && protoc --cpp_out=../ *.proto && cd ../../..)
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -66,8 +71,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-SUBDIRS += \
-    visao.pro
+
 
 DISTFILES += \
     src/License \
