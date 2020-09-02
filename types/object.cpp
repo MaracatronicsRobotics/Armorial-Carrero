@@ -121,7 +121,8 @@ void Object::update(double confidence, Position pos, Angle ori) {
             _lossFilter.lossFilter(true); // dou update no filtro de perda
 
             _kalmanFilter.iterate(pos); // inicializa mais uma iteração no kalman
-            _position.setPosition(_kalmanFilter.getPosition().x(), _kalmanFilter.getPosition().y(), 0.0); // pega a posição retornada pelo kalman
+            //_position.setPosition(_kalmanFilter.getPosition().x(), _kalmanFilter.getPosition().y(), 0.0); // pega a posição retornada pelo kalman
+            _position = pos;
             _velocity = _kalmanFilter.getVelocity();
             _orientation.setValue(ori.value()); // dou update no angulo do robo
             updateToSensor();
