@@ -33,7 +33,7 @@
 class ArmorialVisionClient:public Entity
 {
 public:
-    ArmorialVisionClient(int visionPort = 10006);
+    ArmorialVisionClient(int visionPort = 10006, string visionAddress = "224.5.23.2");
     ~ArmorialVisionClient();
 
     bool hasDetectionUpdate();
@@ -56,6 +56,7 @@ private:
     // Vision system client (to receive camera data)
     RoboCupSSLClient *_vision;
     int _visionPort;
+    string _visionAddress;
     QMutex _portMutex;
 
     // Camera and packets info

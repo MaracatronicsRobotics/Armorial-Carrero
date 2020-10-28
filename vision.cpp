@@ -45,6 +45,7 @@ void samico_drawThread(){
 
 void printUsage() {
     std::cout << ">> Usage: ./vision [port] [field-type] [field-limit] [debug-detection] [debug-geometry]" << std::endl;
+    std::cout << ">>> address: the address that the application will listen to. (default is 224.5.23.2)" << std::endl;
     std::cout << ">>> port: the port that the application will listen to. (default is 10002)" << std::endl;
     std::cout << ">>> field-type: competition field size, 'vision', 'ssl2015', 'ssl2012' or 'vss'. (default is 'vision')" << std::endl;
     std::cout << ">>> field-limit: limit vision to field area, 'q1', 'q2', 'q3', 'q4', 'top', 'bottom', 'right', 'left' or 'all'. (default is 'all')" << std::endl;
@@ -62,6 +63,7 @@ int main(int argc, char** argv) {
     }
 
     QApplication app(argc, argv);
+    string visionSystemAddress = "224.5.23.2";
     int visionSystemPort = 10002;
     FieldTypes::FieldType fieldType = FieldTypes::VISION;
     FieldAreas::FieldArea fieldLimit = FieldAreas::ALL;
@@ -86,9 +88,15 @@ int main(int argc, char** argv) {
         }
         bool isNumber=false;
         QString param;
-        // Port
+        // Address
         if(argc >= 2) {
             param = argv[1];
+            string address = param.toStdString();
+            visionSystemAddress = address;
+        }
+        // Port
+        if(argc >= 3) {
+            param = argv[2];
             int port = param.toInt(&isNumber);
             if(!isNumber) {
                 std::cout << ">> ArmorialVision: [ERROR] Invalid arguments." << std::endl;
@@ -101,8 +109,8 @@ int main(int argc, char** argv) {
             visionSystemPort = port;
         }
         // Field type (graphicalClient)
-        if(argc >= 3) {
-            param = argv[2];
+        if(argc >= 4) {
+            param = argv[3];
             param = param.toLower();
             if(param=="vision")
                 fieldType = FieldTypes::VISION;
@@ -118,8 +126,8 @@ int main(int argc, char** argv) {
             }
         }
         // Field limit for vision
-        if(argc >= 4) {
-            param = argv[3];
+        if(argc >= 5) {
+            param = argv[4];
             param = param.toLower();
             if(param=="all")
                 fieldLimit = FieldAreas::ALL;
@@ -145,8 +153,8 @@ int main(int argc, char** argv) {
             }
         }
         // Debug detection
-        if(argc >= 5) {
-            param = argv[4];
+        if(argc >= 6) {
+            param = argv[5];
             if(param.toInt() == 0 || param.toInt() == 1) {
                 debugDetection = param.toInt();
                 if(debugDetection)
@@ -157,8 +165,8 @@ int main(int argc, char** argv) {
             }
         }
         // Debug geometry
-        if(argc >= 6) {
-            param = argv[5];
+        if(argc >= 7) {
+            param = argv[6];
             if(param.toInt() == 0 || param.toInt() == 1) {
                 debugGeometry = param.toInt();
                 if(debugGeometry)
@@ -168,7 +176,7 @@ int main(int argc, char** argv) {
                 return EXIT_FAILURE;
             }
         }
-        if(argc > 6) {
+        if(argc > 7) {
             std::cout << ">> ArmorialVision: [ERROR] Invalid number of arguments." << std::endl;
             return EXIT_FAILURE;
         }
@@ -181,7 +189,7 @@ int main(int argc, char** argv) {
     const bool enableKalmanFilter = true;
     const bool enableNoiseFilter = true;
     // Create modules
-    ArmorialVisionClient eyeClient(visionSystemPort);
+    ArmorialVisionClient eyeClient(visionSystemPort, visionSystemAddress);
     ArmorialVisionUpdater eyeUpdater(&eyeClient, fieldLimit, enableLossFilter, enableKalmanFilter, enableNoiseFilter, debugDetection, debugGeometry, samico);
 
     // Start modules

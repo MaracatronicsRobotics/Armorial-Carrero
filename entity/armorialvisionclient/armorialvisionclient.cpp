@@ -26,11 +26,12 @@ QString ArmorialVisionClient::name() {
     return "ArmorialVisionClient";
 }
 
-ArmorialVisionClient::ArmorialVisionClient(int visionPort) {
+ArmorialVisionClient::ArmorialVisionClient(int visionPort, string visionAddress) {
     _visionPort = visionPort;
+    _visionAddress = visionAddress;
 
     // Create RoboCupSSLClient to listen to vision packets
-    _vision = new RoboCupSSLClient(_visionPort);
+    _vision = new RoboCupSSLClient(_visionPort, _visionAddress);
 
     // Loop time, disabled
     this->setLoopTime(0);
@@ -51,10 +52,9 @@ void ArmorialVisionClient::initialization() {
 
     // Vision system connection (grSim / ssl-vision)
     if(_vision->open(true))
-        std::cout << ">> ArmorialVisionClient: Listening to vision system on port " << _visionPort << ".\n";
+        std::cout << ">> ArmorialVisionClient: Listening to vision system on port " << _visionPort << " and address " << _visionAddress << ".\n";
     else {
-        cout << ">> ArmorialVisionClient: [ERROR] Cannot listen to vision system on port " << _visionPort << ".\n";
-        this->stopRunning();
+        cout << ">> ArmorialVisionClient: [ERROR] Cannot listen to vision system on port " << _visionPort << " and address " << _visionAddress << ".\n";
         _portMutex.unlock();
         return;
     }
