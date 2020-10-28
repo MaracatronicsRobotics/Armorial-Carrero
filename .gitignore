@@ -45,5 +45,8 @@ CMakeLists.txt.user*
 /build/
 /bin/
 
+*.user
+*.pb.h
+*.pb.cc
 
 *.stash
