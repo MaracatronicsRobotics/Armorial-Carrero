@@ -34,8 +34,6 @@
 
 #include <Robot/robot.h>
 #include <Ball/ball.h>
-
-#include "samico.h"
 #include <types/frame.h>
 
 #define MAX_ROBOTS 12
@@ -46,7 +44,7 @@
 class ArmorialVisionUpdater:public Entity
 {
 public:
-    ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit=FieldAreas::ALL, bool enableLossFilter=true, bool enableKalmanFilter=true, bool enableNoiseFilter=true, bool debugDetection=false, bool debugGeometry=false, Samico *samico = NULL);
+    ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit=FieldAreas::ALL, bool enableLossFilter=true, bool enableKalmanFilter=true, bool enableNoiseFilter=true, bool debugDetection=false, bool debugGeometry=false);
     ~ArmorialVisionUpdater();
 
     QList<Robot*> getRobotObjects() const;
@@ -100,9 +98,6 @@ private:
     bool _debugDetection;
     bool _debugGeometry;
 
-    // Samico GUI
-    Samico *samico;
-    Frame *frameAT = new Frame(MAX_ROBOTS, FILTER_TIME);
 };
 
 #endif // ARMORIALVISIONUPDATER_H

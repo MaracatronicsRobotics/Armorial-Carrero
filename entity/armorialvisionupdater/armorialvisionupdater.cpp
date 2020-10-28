@@ -25,7 +25,7 @@ QString ArmorialVisionUpdater::name() {
     return "ArmorialVisionUpdater";
 }
 
-ArmorialVisionUpdater::ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit, bool enableLossFilter, bool enableKalmanFilter, bool enableNoiseFilter,  bool debugDetection, bool debugGeometry, Samico *samico) {
+ArmorialVisionUpdater::ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisionClient, FieldAreas::FieldArea fieldLimit, bool enableLossFilter, bool enableKalmanFilter, bool enableNoiseFilter,  bool debugDetection, bool debugGeometry) {
     _ArmorialVisionClient = ArmorialVisionClient;
     _fieldLimit = fieldLimit;
     _debugDetection = debugDetection;
@@ -69,9 +69,6 @@ ArmorialVisionUpdater::ArmorialVisionUpdater(ArmorialVisionClient *ArmorialVisio
 
     // Frequency
     this->setLoopFrequency(60); // Hz
-
-    // Samico GUI
-    this->samico = samico;
 }
 
 ArmorialVisionUpdater::~ArmorialVisionUpdater() {
@@ -169,10 +166,6 @@ void ArmorialVisionUpdater::loop() {
         // Release update
         if(_newDetectionUpdates.available()==0)
             _newDetectionUpdates.release();
-
-        // UPDATE Samico
-        if(samico != NULL)
-            samico->setFrame(frameAT);
     }
 
     // Geometry data
@@ -203,23 +196,6 @@ void ArmorialVisionUpdater::processDetectionData(const QList<SSL_DetectionFrame>
     // Process data
     processBalls(balls);
     processRobots(robots);
-
-    // Setting frame to samico
-    //frameAT->_ball = new Ball();
-    //frameAT->_blueRobots.clear();
-    //frameAT->_yellowRobots.clear();
-
-    frameAT->_qt_blue = MAX_ROBOTS;
-    frameAT->_qt_yellow = MAX_ROBOTS;
-    
-    for(int color=Colors::YELLOW; color<=Colors::BLUE; color++) {
-        for(int i = 0; i < MAX_ROBOTS; i++){
-            if(color == Colors::YELLOW) frameAT->_yellowRobots[i] = (*(_objRobots.value(color).value(i)));
-            else if(color == Colors::BLUE) frameAT->_blueRobots[i] = (*(_objRobots.value(color).value(i)));
-        }
-    }
-
-    frameAT->_ball = *(_objBall);
  }
 
 QList<std::pair<int,SSL_DetectionBall> > ArmorialVisionUpdater::parseCamerasBalls(const QList<SSL_DetectionFrame> &detectionFrames) const {

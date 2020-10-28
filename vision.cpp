@@ -33,15 +33,7 @@
 
 #include "exithandler.h"
 
-#include "samico.h"
-
 #define debug false
-
-Samico *samico;
-
-void samico_drawThread(){
-    samico->drawWindow();
-}
 
 void printUsage() {
     std::cout << ">> Usage: ./vision [port] [field-type] [field-limit] [debug-detection] [debug-geometry]" << std::endl;
@@ -53,14 +45,6 @@ void printUsage() {
     std::cout << ">>> debug-geometry: enable debug geometry, 0 or 1. (default is 0)" << std::endl;
 }
 int main(int argc, char** argv) {
-
-// Run Samico
-    if(debug){
-        samico = new Samico();
-        samico->getWindow()->setActive(false); // deactivating samico in main thread
-        thread first (samico_drawThread);
-        first.detach();
-    }
 
     QApplication app(argc, argv);
     string visionSystemAddress = "224.5.23.2";
@@ -190,7 +174,7 @@ int main(int argc, char** argv) {
     const bool enableNoiseFilter = true;
     // Create modules
     ArmorialVisionClient eyeClient(visionSystemPort, visionSystemAddress);
-    ArmorialVisionUpdater eyeUpdater(&eyeClient, fieldLimit, enableLossFilter, enableKalmanFilter, enableNoiseFilter, debugDetection, debugGeometry, samico);
+    ArmorialVisionUpdater eyeUpdater(&eyeClient, fieldLimit, enableLossFilter, enableKalmanFilter, enableNoiseFilter, debugDetection, debugGeometry);
 
     // Start modules
     eyeClient.start();
