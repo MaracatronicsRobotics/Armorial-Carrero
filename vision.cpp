@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  ***/
 
-#include <QApplication>
+#include <QCoreApplication>
 #include <iostream>
 
 #include <entity/armorialvisionclient/armorialvisionclient.h>
@@ -46,7 +46,7 @@ void printUsage() {
 }
 int main(int argc, char** argv) {
 
-    QApplication app(argc, argv);
+    QCoreApplication app(argc, argv);
     string visionSystemAddress = "224.5.23.2";
     int visionSystemPort = 10002;
     FieldTypes::FieldType fieldType = FieldTypes::VISION;
